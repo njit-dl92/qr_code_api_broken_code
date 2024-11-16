@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.10.12] # Define Python versions here
+        python-version: [3.10.12] # Update if using another Python version
     steps:
       - uses: actions/checkout@v4
       
@@ -58,16 +58,16 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: kaw393939/devops_demo:${{ github.sha }} # Uses the Git SHA for tagging
-          platforms: linux/amd64,linux/arm64 # Multi-platform support
-          cache-from: type=registry,ref=kaw393939/devops_demo:cache
+          tags: njit-dl92/qr_code_api:${{ github.sha }} # Replace with your DockerHub repo
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=registry,ref=njit-dl92/qr_code_api:cache
           cache-to: type=inline,mode=max
           
       - name: Scan the Docker image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'kaw393939/devops_demo:${{ github.sha }}'
+          image-ref: 'njit-dl92/qr_code_api:${{ github.sha }}'
           format: 'table'
-          exit-code: '1' # Fail the job if vulnerabilities are found
+          exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'

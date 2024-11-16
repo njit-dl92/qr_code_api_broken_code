@@ -58,15 +58,15 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: njit-dl92/qr_code_api_broken_code:${{ github.sha }} # Replace with your DockerHub repo
+          tags: njitdl92/qr_code_api_broken_code-fastapi:${{ github.sha }} # Ensure this is your correct DockerHub repo name
           platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,ref=njit-dl92/qr_code_api_broken_code:cache
+          cache-from: type=registry,ref=njit-dl92/qr_code_api_broken_code-fastapi:cache
           cache-to: type=inline,mode=max
           
       - name: Scan the Docker image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'njit-dl92/qr_code_api_broken_code:${{ github.sha }}'
+          image-ref: 'njitdl92/qr_code_api_broken_code-fastapi:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
